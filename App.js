@@ -94,7 +94,6 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
   .map(cTask => <Button key={cTask.key} title={cTask.description}
   onPress={() => {
   navigation.dispatch(StackActions.push('Details', {item:cTask}));
-  navigation.navigate("Details", {item: cTask, tasks, setTasks})
   }}
   />)
   }
