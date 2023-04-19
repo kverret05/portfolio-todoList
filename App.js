@@ -19,8 +19,8 @@ async function cacheFonts(fonts) {
 
 let initTasks = [
   {description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
-  {description: "Take a shower", completed: true, key: 2, relatedTasks: [3]},
-  {description: "Eat dinner", completed: true, key: 2, relatedTasks: [1] }
+  {description: "Take a shower", completed: true, key: 2},
+  {description: "Eat dinner", completed: true, key: 3 }
 ]
 
 const Stack = createNativeStackNavigator()
@@ -70,13 +70,13 @@ return <Stack.Navigator initialRouteName='To Do List'>
 </Stack.Screen>
 <StackScreen name="Details">
   {(props) => (
-    <TodoScreen {...props} tasks={tasks} setTasks={setTasks} /> 
+    <DetailsScreen {...props} tasks={tasks} setTasks={setTasks} /> 
   )}
 </StackScreen>
   </Stack.Navigator>
 }
 function DetailsScreen({navigation, route, setTasks, tasks}) {
-  let {description, completed, key, relatedTasks} = route.params.getItem
+  let {description, completed, key, relatedTasks} = route.params.item
   useEffect(() => {
     navigation.setOptions({
       title: description === "" ? "No title" : description, 
@@ -90,10 +90,11 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
   relatedTasks !== undefined && relatedTasks.length > 0 ?
   <>
   <Text>Related Tasks:</Text>
-  {tasks.filter(task = relatedTasks.includes(task.key))
+  {tasks.filter(tasks= relatedTasks.includes(tasks.key))
   .map(cTask => <Button key={cTask.key} title={cTask.description}
   onPress={() => {
   navigation.dispatch(StackActions.push('Details', {item:cTask}));
+  navigation.navigate("Details", {item: cTask, tasks, setTasks})
   }}
   />)
   }
