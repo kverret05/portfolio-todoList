@@ -19,8 +19,7 @@ async function cacheFonts(fonts) {
 
 let initTasks = [
   {description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
-  {description: "Take a shower", completed: true, key: 2},
-  {description: "Eat dinner", completed: true, key: 3 }
+  {description: "Take a shower", completed: true, key: 2}
 ]
 
 const Stack = createNativeStackNavigator()
@@ -70,11 +69,12 @@ return <Stack.Navigator initialRouteName='To Do List'>
 </Stack.Screen>
 <StackScreen name="Details">
   {(props) => (
-    <DetailsScreen {...props} tasks={tasks} setTasks={setTasks} /> 
+    <DetailsScreen {...props} setTasks={setTasks} tasks={tasks} /> 
   )}
 </StackScreen>
   </Stack.Navigator>
 }
+
 function DetailsScreen({navigation, route, setTasks, tasks}) {
   let {description, completed, key, relatedTasks} = route.params.item
   useEffect(() => {
@@ -84,7 +84,7 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
   }, [navigation])
   return (
   <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
-  <Text>Details Screen</Text>
+  <Text>Details Screen New</Text>
   <Text>{description}</Text>
   {
   relatedTasks !== undefined && relatedTasks.length > 0 ?
@@ -103,13 +103,14 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
   </View>
   )
   }
+
   function TodoScreen({navigation, tasks, setTasks}) {
     cacheFonts([FontAwesome.font])
     let [input, setInput] = useState("")
     let updateTask = async (task) => {
     console.log(task)
     task.completed = !task.completed
-    setTasks({...tasks})
+    setTasks([...tasks])
     await AsyncStorage.setItem('@tasks', JSON.stringify(tasks))
     }
     let addTask = async () => {
@@ -129,7 +130,7 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     ]
     setTasks(newTasks)
     console.log(newTasks)
-    await AsyncStorage.setItems('@tasks', JSON.stringify(newTasks))
+    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
     setInput("")
     }
     let renderItem = ({item}) => {
@@ -143,9 +144,9 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     } : undefined}
     title={item.description}
     checked={item.completed}
-    onPress={() => updateTasks(item)}
+    onPress={() => updateTask(item)}
     />
-    <Button title="Details" onPress={() => navigation.navigate("Details", {items})}/>
+    <Button title="Details" onPress={() => navigation.navigate("Details", {item})}/>
     </View>
     )
     
