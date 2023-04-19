@@ -67,11 +67,11 @@ return <Stack.Navigator initialRouteName='To Do List'>
     <TodoScreen {...props} tasks={tasks} setTasks={setTasks} />
   )}
 </Stack.Screen>
-<StackScreen name="Details">
+<Stack.Screen name="Details">
   {(props) => (
     <DetailsScreen {...props} setTasks={setTasks} tasks={tasks} /> 
   )}
-</StackScreen>
+</Stack.Screen>
   </Stack.Navigator>
 }
 
