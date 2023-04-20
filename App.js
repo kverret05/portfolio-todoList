@@ -19,7 +19,7 @@ async function cacheFonts(fonts) {
 
 let initTasks = [
   {description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
-  {description: "Take a shower", completed: true, key: 2}
+  {description: "Take a shower", completed: true, key: 2, relatedTasks: [1]},
 ]
 
 const Stack = createNativeStackNavigator()
@@ -76,29 +76,29 @@ return <Stack.Navigator initialRouteName='To Do List'>
 }
 
 function DetailsScreen({navigation, route, setTasks, tasks}) {
-  let {description, completed, key, relatedTasks} = route.params.item
-  useEffect(() => {
-    navigation.setOptions({
-      title: description === "" ? "No title" : description, 
+    let {description, completed, key, relatedTasks} = route.params.item
+    useEffect(() => {
+        navigation.setOptions({
+        title: description === "" ? "No title" : description, 
   })
   }, [navigation])
   return (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
-  <Text>Details Screen New</Text>
-  <Text>{description}</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
+    <Text>Details Screen New</Text>
+    <Text>{description}</Text>
   {
-  relatedTasks !== undefined && relatedTasks.length > 0 ?
+ relatedTasks !== undefined && relatedTasks.length > 0 ?
   <>
-  <Text>Related Tasks:</Text>
-  {tasks.filter(tasks= relatedTasks.includes(tasks.key))
-  .map(cTask => <Button key={cTask.key} title={cTask.description}
-  onPress={() => {
-  navigation.dispatch(StackActions.push('Details', {item:cTask}));
-  }}
-  />)
+    <Text>Related Tasks:</Text>
+      {tasks.filter(tasks= relatedTasks.includes(tasks.key))
+      .map(cTask => <Button key={cTask.key} title={cTask.description}
+       onPress={() => {
+         navigation.dispatch(StackActions.push('Details', {item:cTask}));
+      }}
+    />)
   }
   </>
-  : undefined}
+    : undefined}
   </View>
   )
   }
@@ -115,8 +115,8 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     let addTask = async () => {
     let maxKey = 0
     tasks.forEach(task => {
-    if(task.key > maxKey) {
-    maxKey = task.key
+     if(task.key > maxKey) {
+      maxKey = task.key
     }
     })
     let newTasks = [
@@ -128,13 +128,13 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     },
     ]
     setTasks(newTasks)
-    console.log(newTasks)
-    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
-    setInput("")
+     console.log(newTasks)
+      await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
+     setInput("")
     }
     let renderItem = ({item}) => {
-    return (
-    <View style={styles.horizontal}>
+     return (
+      <View style={styles.horizontal}>
     
     <CheckBox
     textStyle={item.completed ? {
