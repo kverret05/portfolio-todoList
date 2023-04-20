@@ -33,7 +33,9 @@ export default function App() {
         component = {ToDoHomeScreen}
         options={{ headerShown: false }}
         />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen 
+        name="Settings" 
+        component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   )  
@@ -64,12 +66,14 @@ function ToDoHomeScreen() {
 return <Stack.Navigator initialRouteName='To Do List'>
 <Stack.Screen name="Todo List">
   {(props) => (
-    <TodoScreen {...props} tasks={tasks} setTasks={setTasks} />
+    <TodoScreen 
+    {...props} tasks={tasks} setTasks={setTasks} />
   )}
 </Stack.Screen>
 <Stack.Screen name="Details">
   {(props) => (
-    <DetailsScreen {...props} setTasks={setTasks} tasks={tasks} /> 
+    <DetailsScreen
+     {...props} setTasks={setTasks} tasks={tasks} /> 
   )}
 </Stack.Screen>
   </Stack.Navigator>
