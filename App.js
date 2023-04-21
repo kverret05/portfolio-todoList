@@ -18,7 +18,7 @@ async function cacheFonts(fonts) {
 }
 
 let initTasks = [
-  {description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
+  {description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
   {description: "Take a shower", completed: true, key: 2, relatedTasks: [1]},
 ]
 
