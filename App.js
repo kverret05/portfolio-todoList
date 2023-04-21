@@ -111,20 +111,20 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     cacheFonts([FontAwesome.font])
     let [input, setInput] = useState("")
     let updateTask = async (task) => {
-    console.log(task)
-    task.completed = !task.completed
-    setTasks([...tasks])
-    await AsyncStorage.setItem('@tasks', JSON.stringify(tasks))
+      console.log(task)
+      task.completed = !task.completed
+      setTasks([...tasks])
+        await AsyncStorage.setItem('@tasks', JSON.stringify(tasks))
     }
     let addTask = async () => {
     let maxKey = 0
-    tasks.forEach(task => {
-     if(task.key > maxKey) {
-      maxKey = task.key
+     tasks.forEach(task => {
+      if(task.key > maxKey) {
+        maxKey = task.key
     }
     })
     let newTasks = [
-    ...tasks, 
+      ...tasks, 
     {
     description: input,
     completed: false,
@@ -134,7 +134,7 @@ function DetailsScreen({navigation, route, setTasks, tasks}) {
     setTasks(newTasks)
      console.log(newTasks)
       await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
-     setInput("")
+      setInput("")
     }
     let renderItem = ({item}) => {
      return (
