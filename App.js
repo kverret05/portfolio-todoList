@@ -18,8 +18,8 @@ async function cacheFonts(fonts) {
 }
 
 let initTasks = [
-  { description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
-  { description: "Take a shower", completed: true, key: 2, relatedTasks: [1] },
+  { description: "Do Homework", completed: false, key: 1, relatedTasks: [2] },
+  { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] },
 ]
 
 const Stack = createNativeStackNavigator()
@@ -107,7 +107,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
   )
 }
 
-function TodoScreen({ navigation, tasks, setTasks, removeTask }) {
+function TodoScreen({ navigation, tasks, setTasks }) {
   cacheFonts([FontAwesome.font])
   let [input, setInput] = useState("")
   let updateTask = async (task) => {
@@ -159,10 +159,9 @@ function TodoScreen({ navigation, tasks, setTasks, removeTask }) {
   }
 
   let removeTask = async (taskToRemove) => {
-    let newTasks = tasks.filter(task => task.key !== taskToRemove.key);
-    setTasks(newTasks);
-    console.log(newTasks);
-    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks));
+    let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
+    setTasks(newTasks)
+    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
   }
 
   return (
@@ -202,6 +201,6 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    padding: 10,
+    padding: 30,
   },
 })
