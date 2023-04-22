@@ -20,7 +20,7 @@ async function cacheFonts(fonts) {
 let initTasks = [
   { description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
   { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] },
-  {description: "Eat dinner", completed: false, key: 3, relatedTasks: [3]}
+  { description: "Eat dinner", completed: false, key: 3, relatedTasks: [3] }
 ]
 
 const Stack = createNativeStackNavigator()
@@ -42,6 +42,7 @@ export default function App() {
   )
 }
 
+// will add dark and light mode with theme content provider
 function SettingsScreen() {
   return <Text>Settings Screen</Text>
 }
@@ -141,13 +142,13 @@ function TodoScreen({ navigation, tasks, setTasks }) {
     setInput("")
   }
 
-// new added component: removeTask, just need to add confirmation alert 
-let removeTask = async (taskToRemove) => {
-  let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
-  setTasks(newTasks)
-  console.log(newTasks)
-  await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
-}
+  // new added component: removeTask, just need to add confirmation alert 
+  let removeTask = async (taskToRemove) => {
+    let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
+    setTasks(newTasks)
+    console.log(newTasks)
+    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
+  }
 
   let renderItem = ({ item }) => {
     return (
@@ -161,7 +162,7 @@ let removeTask = async (taskToRemove) => {
           checked={item.completed}
           onPress={() => updateTask(item)}
         />
-        <Button title="Details" onPress={() => navigation.navigate("Details", { item, setTasks, tasks })} /> 
+        <Button title="Details" onPress={() => navigation.navigate("Details", { item, setTasks, tasks })} />
         <Button title="Remove?" onPress={() => removeTask(item)} />
       </View>
     )
