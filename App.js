@@ -88,7 +88,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
   }, [navigation])
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen New</Text>
+      <Text>Details Screen</Text>
       <Text>{description}</Text>
       {
         relatedTasks !== undefined && relatedTasks.length > 0 ?
