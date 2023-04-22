@@ -79,7 +79,7 @@ function ToDoHomeScreen() {
   </Stack.Navigator>
 }
 
-function DetailsScreen({ navigation, route, tasks }) {
+function DetailsScreen({ navigation, route, setTasks, tasks }) {
   let { description, relatedTasks } = route.params.item
   useEffect(() => {
     navigation.setOptions({
@@ -98,7 +98,7 @@ function DetailsScreen({ navigation, route, tasks }) {
             {tasks.filter(task => relatedTasks.includes(task.key))
               .map(cTask => <Button key={cTask.key} title={cTask.description}
                 onPress={() => {
-                  navigation.dispatch(StackActions.push('Details', { item: cTask }));
+                  navigation.dispatch(StackActions.push('Details', { item: cTask, setTasks, tasks }));
                 }}
               />)
             }
@@ -160,7 +160,7 @@ let removeTask = async (taskToRemove) => {
           checked={item.completed}
           onPress={() => updateTask(item)}
         />
-        <Button title="Details" onPress={() => navigation.navigate("Details", { item })} /> 
+        <Button title="Details" onPress={() => navigation.navigate("Details", { item, setTasks, tasks })} /> 
         <Button title="Remove?" onPress={() => removeTask(item)} />
       </View>
     )
