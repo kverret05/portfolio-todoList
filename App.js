@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { Alert, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { FlatList } from "react-native"
 import { Button, CheckBox, Input, Text } from '@rneui/themed'
 import * as Font from 'expo-font'
