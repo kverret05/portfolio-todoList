@@ -86,6 +86,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
       title: description === "" ? "No title" : description,
     })
   }, [navigation])
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
@@ -94,7 +95,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
         relatedTasks !== undefined && relatedTasks.length > 0 ?
           <>
             <Text>Related Tasks:</Text>
-            {tasks.filter(tasks = relatedTasks.includes(tasks.key))
+            {tasks.filter(task => relatedTasks.includes(task.key))
               .map(cTask => <Button key={cTask.key} title={cTask.description}
                 onPress={() => {
                   navigation.dispatch(StackActions.push('Details', { item: cTask }));
