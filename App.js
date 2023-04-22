@@ -18,8 +18,9 @@ async function cacheFonts(fonts) {
 }
 
 let initTasks = [
-  { description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
+  { description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
   { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] },
+  {description: "Eat dinner", completed: false, key: 3, relatedTasks: [3]}
 ]
 
 const Stack = createNativeStackNavigator()
@@ -140,7 +141,7 @@ function TodoScreen({ navigation, tasks, setTasks }) {
     setInput("")
   }
 
-// new added component: removeTask
+// new added component: removeTask, just need to add confirmation alert 
 let removeTask = async (taskToRemove) => {
   let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
   setTasks(newTasks)
