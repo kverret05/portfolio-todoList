@@ -18,7 +18,7 @@ async function cacheFonts(fonts) {
 }
 
 let initTasks = [
-  { description: "Do Homework", completed: false, key: 1, relatedTasks: [2] },
+  { description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
   { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] },
 ]
 
@@ -79,8 +79,8 @@ function ToDoHomeScreen() {
   </Stack.Navigator>
 }
 
-function DetailsScreen({ navigation, route, setTasks, tasks }) {
-  let { description, completed, key, relatedTasks } = route.params.item
+function DetailsScreen({ navigation, route, tasks }) {
+  let { description, relatedTasks } = route.params.item
   useEffect(() => {
     navigation.setOptions({
       title: description === "" ? "No title" : description,
