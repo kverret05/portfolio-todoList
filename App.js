@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
+import { Alert, StyleSheet, View } from 'react-native'
 import { FlatList } from "react-native"
 import { Button, CheckBox, Input, Text } from '@rneui/themed'
 import * as Font from 'expo-font'
@@ -138,6 +138,13 @@ function TodoScreen({ navigation, tasks, setTasks }) {
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
     setInput("")
   }
+// new added component: removeTask
+let removeTask = async (taskToRemove) => {
+  let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
+  setTasks(newTasks)
+  console.log(newTasks)
+  await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
+}
 
   let renderItem = ({ item }) => {
     return (
@@ -156,13 +163,6 @@ function TodoScreen({ navigation, tasks, setTasks }) {
       </View>
     )
 
-  }
-
-  // new added component: removeTask
-    let removeTask = async (taskToRemove) => {
-    let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
-    setTasks(newTasks)
-    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
   }
 
   return (
