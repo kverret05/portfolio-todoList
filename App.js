@@ -4,13 +4,14 @@ import { FlatList } from "react-native"
 import { Button, CheckBox, Input, Text } from '@rneui/themed'
 import * as Font from 'expo-font'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Switch } from 'react-native-gesture-handler'
+
 
 const Tab = createBottomTabNavigator()
 
@@ -25,8 +26,22 @@ let initTasks = [
 
 const Stack = createNativeStackNavigator()
 
+const ThemeContext = createContext(null)
+
+const lightTheme = {
+  background: '#fff',
+  text: '#000',
+};
+
+const darkTheme = {
+  background: '#111',
+  text: '#fff',
+};
+
+
 export default function App() {
   return (
+    <ThemeContext.Provider value={lightTheme}>
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
@@ -39,22 +54,28 @@ export default function App() {
           component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+    </ThemeContext.Provider>
   )
 }
-// added light and dark mode to settings screen
+
+// added light and dark mode toggle to settingscreen
+// working on applying to all screens
 function SettingsScreen() {
   const [darkMode, setDarkMode] = useState(false);
-  
+  const theme = darkMode ? darkTheme : lightTheme;
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
-      <Text>Settings Screen</Text>
-      <Text>Dark Mode</Text>
-      <Switch value={darkMode} onValueChange={toggleDarkMode}
-      />
-    </View>
+    <ThemeContext.Provider value={theme}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: theme.background }}>
+        <Text style={{ color: theme.text }}>Settings Screen</Text>
+        <Text style={{ color: theme.text }}>Dark Mode</Text>
+        <Switch value={darkMode} onValueChange={toggleDarkMode} />
+      </View>
+    </ThemeContext.Provider>
   );
 }
 
