@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { Switch } from 'react-native-gesture-handler'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,10 +41,21 @@ export default function App() {
     </NavigationContainer>
   )
 }
-
-// will add dark and light mode with theme content provider
+// added light and dark mode to settings screen
 function SettingsScreen() {
-  return <Text>Settings Screen</Text>
+  const [darkMode, setDarkMode] = useState(false);
+  
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  }
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
+      <Text>Settings Screen</Text>
+      <Text>Dark Mode</Text>
+      <Switch value={darkMode} onValueChange={toggleDarkMode}
+      />
+    </View>
+  );
 }
 
 function ToDoHomeScreen() {
