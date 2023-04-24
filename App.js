@@ -18,9 +18,8 @@ async function cacheFonts(fonts) {
 }
 
 let initTasks = [
-  { description: "Do homework", completed: true, key: 1, relatedTasks: [2] },
-  { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] },
-  { description: "Eat dinner", completed: false, key: 3, relatedTasks: [3] }
+  { description: "Do homework", completed: false, key: 1, relatedTasks: [2] },
+  { description: "Take a shower", completed: false, key: 2 }
 ]
 
 const Stack = createNativeStackNavigator()
