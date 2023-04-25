@@ -63,7 +63,6 @@ export default function App() {
 function SettingsScreen() {
   const [darkMode, setDarkMode] = useState(false);
   const theme = darkMode ? darkTheme : lightTheme;
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
