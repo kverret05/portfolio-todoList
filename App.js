@@ -112,6 +112,7 @@ function ToDoHomeScreen() {
 }
 
 function DetailsScreen({ navigation, route, setTasks, tasks }) {
+  console.log(route.params.item.relatedTasks);
   let { description, relatedTasks } = route.params.item
   useEffect(() => {
     navigation.setOptions({
@@ -130,7 +131,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
             {tasks.filter(task => relatedTasks.includes(task.key))
               .map(cTask => <Button key={cTask.key} title={cTask.description}
                 onPress={() => {
-                  navigation.dispatch(StackActions.push('Details', { item: cTask, setTasks, tasks }));
+                  navigation.dispatch(StackActions.push('Details', { item: cTask, setTasks, tasks, relatedTasks: cTask.relatedTasks }));
                 }}
               />)
             }
@@ -139,6 +140,7 @@ function DetailsScreen({ navigation, route, setTasks, tasks }) {
     </View>
   )
 }
+
 
 function TodoScreen({ navigation, tasks, setTasks }) {
   cacheFonts([FontAwesome.font])
