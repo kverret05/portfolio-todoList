@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Switch } from 'react-native-gesture-handler'
 
-
 const Tab = createBottomTabNavigator()
 
 async function cacheFonts(fonts) {
