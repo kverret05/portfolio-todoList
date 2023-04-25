@@ -19,7 +19,7 @@ async function cacheFonts(fonts) {
   return fonts.map(async (font) => await Font.loadAsync(font))
 }
 
-let initTasks = [
+const initTasks = [
   { description: "Do homework", completed: false, key: 1, relatedTasks: [2] },
   { description: "Take a shower", completed: false, key: 2 }
 ]
