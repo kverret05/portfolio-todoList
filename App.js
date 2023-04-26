@@ -194,11 +194,15 @@ function TodoScreen({ navigation, tasks, setTasks }) {
           checked={item.completed}
           onPress={() => updateTask(item)}
         />
-        <Button title="Details" onPress={() => navigation.navigate("Details", { item, setTasks, tasks })} />
+        <Button title="Details" onPress={() => {
+          navigation.navigate("Details", { item });
+          navigation.setParams({ setTasks: setTasks });
+        }} />
         <Button title="Remove?" onPress={() => removeTask(item)} />
       </View>
     )
   }
+  
 
   return (
     <View style={[styles.container]}>
