@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
-import { FlatList } from "react-native"
+import { StyleSheet, View, FlatList } from 'react-native'
 import { Button, CheckBox, Input, Text } from '@rneui/themed'
 import * as Font from 'expo-font'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -20,7 +19,7 @@ async function cacheFonts(fonts) {
 
 const initTasks = [
   { description: "Do homework", completed: false, key: 1, relatedTasks: [2] },
-  { description: "Take a shower", completed: false, key: 2, relatedTasks: [1] }
+  { description: "Play video games", completed: false, key: 2 }
 ]
 
 const Stack = createNativeStackNavigator()
