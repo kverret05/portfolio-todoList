@@ -174,7 +174,7 @@ function TodoScreen({ navigation, tasks, setTasks }) {
     setInput("")
   }
 
-  // new added component: removeTask, just need to add confirmation alert 
+  // new added component: removeTask 
   let removeTask = async (taskToRemove) => {
     let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
     setTasks(newTasks)
