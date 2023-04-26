@@ -1,8 +1,8 @@
 import React, { useState, createContext } from "react";
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
-export const ThemeProvider = (props) => {
+ const ThemeProvider = (props) => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -15,4 +15,6 @@ export const ThemeProvider = (props) => {
     </ThemeContext.Provider>
   );
 };
+
+export { ThemeContext, ThemeProvider};
 
