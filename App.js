@@ -3,13 +3,12 @@ import { StyleSheet, View, FlatList } from 'react-native'
 import { Button, CheckBox, Input, Text } from '@rneui/themed'
 import * as Font from 'expo-font'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Switch } from 'react-native-gesture-handler'
 
 const Tab = createBottomTabNavigator()
 
@@ -17,64 +16,13 @@ async function cacheFonts(fonts) {
   return fonts.map(async (font) => await Font.loadAsync(font))
 }
 
-const initTasks = [
+let initTasks = [
   { description: "Do homework", completed: false, key: 1, relatedTasks: [2] },
   { description: "Play video games", completed: false, key: 2 }
 ]
 
 const Stack = createNativeStackNavigator()
 
-const ThemeContext = createContext(null)
-
-const lightTheme = {
-  background: '#fff',
-  text: '#000',
-};
-
-const darkTheme = {
-  background: '#111',
-  text: '#fff',
-};
-
-
-export default function App() {
-  return (
-    <ThemeContext.Provider value={lightTheme}>
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={ToDoHomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-    </ThemeContext.Provider>
-  )
-}
-
-// added light and dark mode toggle to settingscreen
-// working on applying to all screens
-function SettingsScreen() {
-  const [darkMode, setDarkMode] = useState(false);
-  const theme = darkMode ? darkTheme : lightTheme;
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  }
-
-  return (
-    <ThemeContext.Provider value={theme}>
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: theme.background }}>
-        <Text style={{ color: theme.text }}>Settings Screen</Text>
-        <Text style={{ color: theme.text }}>Dark Mode</Text>
-        <Switch value={darkMode} onValueChange={toggleDarkMode} />
-      </View>
-    </ThemeContext.Provider>
-  );
-}
 
 function ToDoHomeScreen() {
   let [tasks, setTasks] = useState(initTasks)
@@ -174,8 +122,8 @@ function TodoScreen({ navigation, tasks, setTasks }) {
   }
 
   // new added component: removeTask 
-  let removeTask = async (taskToRemove) => {
-    let newTasks = tasks.filter(task => task.key !== taskToRemove.key)
+  let removeTask = async (key) => {
+    let newTasks = tasks.filter(task => task.key !== key)
     setTasks(newTasks)
     console.log(newTasks)
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
@@ -216,6 +164,20 @@ function TodoScreen({ navigation, tasks, setTasks }) {
         <Button title="Add task" onPress={addTask} />
       </View>
     </View>
+  )
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={ToDoHomeScreen}
+          options={{ headerShown: false }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   )
 }
 
