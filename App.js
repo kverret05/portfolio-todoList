@@ -6,9 +6,9 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import DetailsScreen from "./src/screens/DetailsScreen"
 
 
 const Tab = createBottomTabNavigator()
@@ -67,37 +67,6 @@ function ToDoHomeScreen() {
     </Stack.Screen>
   </Stack.Navigator>
 }
-
-function DetailsScreen({ navigation, route, setTasks, tasks }) {
-  console.log(route.params.item.relatedTasks);
-  let { description, relatedTasks } = route.params.item
-  useEffect(() => {
-    navigation.setOptions({
-      title: description === "" ? "No title" : description,
-    })
-  }, [navigation])
-
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Details Screen</Text>
-      <Text>{description}</Text>
-      {
-        relatedTasks !== undefined && relatedTasks.length > 0 ?
-          <>
-            <Text>Related Tasks:</Text>
-            {tasks.filter(task => relatedTasks.includes(task.key))
-              .map(cTask => <Button key={cTask.key} title={cTask.description}
-                onPress={() => {
-                  navigation.dispatch(StackActions.push('Details', { item: cTask, setTasks, tasks, relatedTasks: cTask.relatedTasks }));
-                }}
-              />)
-            }
-          </>
-          : undefined}
-    </View>
-  )
-}
-
 
 function TodoScreen({ navigation, tasks, setTasks }) {
   cacheFonts([FontAwesome.font])
