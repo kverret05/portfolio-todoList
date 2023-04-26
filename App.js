@@ -123,7 +123,7 @@ function TodoScreen({ navigation, tasks, setTasks }) {
 
   // new added component: removeTask 
   let removeTask = async (tasktoRemove) => {
-    let newTasks = tasks.filter(task => task.key !== tasktoRemove)
+    let newTasks = tasks.filter(task => task.key !== tasktoRemove.key)
     setTasks(newTasks)
     console.log(newTasks)
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
