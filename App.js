@@ -10,6 +10,7 @@ import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
+
 const Tab = createBottomTabNavigator()
 
 async function cacheFonts(fonts) {
@@ -160,7 +161,6 @@ function TodoScreen({ navigation, tasks, setTasks }) {
     )
   }
   
-
   return (
     <View style={[styles.container]}>
       <StatusBar style="auto" />
