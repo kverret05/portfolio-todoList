@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { ThemeProvider } from './src/components/ThemeContext'
 
 const Tab = createBottomTabNavigator()
 
