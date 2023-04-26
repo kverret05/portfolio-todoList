@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { View } from "react-native";
 
 
-export function DetailsScreen({ navigation, route, setTasks, tasks }) {
+function DetailsScreen({ navigation, route, setTasks, tasks }) {
     console.log(route.params.item.relatedTasks);
     let { description, relatedTasks } = route.params.item
     useEffect(() => {
