@@ -23,6 +23,16 @@ let taskData = [
     completed: false, 
     key: 2 
   },
+  { 
+    description: "Eat food", 
+    completed: false, 
+    key: 3 
+  },
+  { 
+    description: "Go to sleep", 
+    completed: false, 
+    key: 4
+  }, 
 ];
 
 const Stack = createNativeStackNavigator()
