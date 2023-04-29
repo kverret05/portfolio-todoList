@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Button, CheckBox, Input } from '@rneui/themed'
+// change @rneui/themed to react native elements!!!!!
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, View, FlatList } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
