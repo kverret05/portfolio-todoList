@@ -11,18 +11,10 @@ import TodoScreen from './src/screens/ToDoScreen'
 const Tab = createBottomTabNavigator()
 
 let taskData = [
-  { 
-    description: "Do homework", 
-    completed: false, 
-    key: 1, 
-    relatedTasks: [2]
-   },
-  { 
-    description: "Play video games", 
-    completed: false, 
-    key: 2 
-  },
-];
+  { description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
+  { description: "Feed Dog", completed: false, key: 2, relatedTasks: [3] },
+  { description: "Take A Shower", completed: false, key: 3, relatedTasks: [1] }
+]
 
 const Stack = createNativeStackNavigator()
 
