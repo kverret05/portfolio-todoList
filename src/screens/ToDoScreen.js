@@ -45,6 +45,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
   
     // new added component: removeTask
     // working on adding confirmation alert 
+    // need to add this into a separate file but it would be referenced and imported here
     let removeTask = async (tasktoRemove) => {
       let newTasks = tasks.filter(task => task.key !== tasktoRemove.key)
       setTasks(newTasks)
