@@ -1,5 +1,5 @@
 import { StackActions } from "@react-navigation/native";
-import { Text } from "@rneui/themed";
+import { Text } from "@rneui/themed"; // change to react-native-elements
 import React, { useEffect } from "react";
 import { View } from "react-native";
 

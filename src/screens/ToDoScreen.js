@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Button, CheckBox, Input } from '@rneui/themed'
+// change @rneui/themed to react native elements!!!!!
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, View, FlatList } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -45,6 +46,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
   
     // new added component: removeTask
     // working on adding confirmation alert 
+    // need to add this into a separate file but it would be referenced and imported here
     let removeTask = async (tasktoRemove) => {
       let newTasks = tasks.filter(task => task.key !== tasktoRemove.key)
       setTasks(newTasks)
