@@ -40,14 +40,14 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
       ]
   
       setTasks(newTasks)
-  
-    let renderItem = ({ item }) => {
-      return (
-        <View style={styles.horizontal}>
       console.log(newTasks)
       await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
       setInput("")
     }
+  
+    let renderItem = ({ item }) => {
+      return (
+        <View style={styles.horizontal}>
           <CheckBox
             textStyle={item.completed ? {
               textDecorationLine: "line-through",
