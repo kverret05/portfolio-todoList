@@ -60,11 +60,10 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           checked={item.completed}
           onPress={() => updateTask(item)}
         />
-        <Button
-          title="Details"
-          onPress={() => {
-            navigation.navigate("Details", { item, setTasks });
-          }} />
+         <Button title="Details" onPress={() => {
+          navigation.navigate("Details", { item });
+          navigation.setParams({ setTasks: setTasks });
+        }} />
         <Button
           icon={<FontAwesome name="trash-o" size={24} color="white" />}
           onPress={() => RemoveTask(item, tasks, setTasks)}
@@ -83,7 +82,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           value={input}
           placeholder="New task...">
         </Input>
-        <Button title="Add task" onPress={addTask} />
+        <Button title="Add" onPress={addTask} />
       </View>
     </View>
   )
