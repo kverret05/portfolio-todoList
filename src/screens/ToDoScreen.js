@@ -7,7 +7,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import * as Font from 'expo-font'
 import React, { useState } from "react"
 import { styles } from "../../App"
-import { removeTask } from "./RemoveTask";
+import RemoveTask from "../components/RemoveTask"
+
 
 export async function cacheFonts(fonts) {
     return fonts.map(async (font) => await Font.loadAsync(font))
@@ -61,7 +62,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
             navigation.navigate("Details", { item });
             navigation.setParams({ setTasks: setTasks });
           }} />
-          <Button title="Remove?" onPress={() => removeTask(item, tasks, setTasks)} />
+          <Button title="Remove?" onPress={() => RemoveTask(item, tasks, setTasks)} />
         </View>
       )
     }
