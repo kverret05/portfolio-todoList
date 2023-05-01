@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { Button, CheckBox, Input } from '@rneui/themed'
+import { Button, CheckBox, Input } from 'react-native-elements'
 // change @rneui/themed to react native elements!!!!!
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, View, FlatList } from 'react-native'
@@ -7,6 +7,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'
 import * as Font from 'expo-font'
 import React, { useState } from "react"
 import { styles } from "../../App"
+import { removeTask } from "./RemoveTask";
 
 export async function cacheFonts(fonts) {
     return fonts.map(async (font) => await Font.loadAsync(font))
@@ -39,24 +40,14 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
       ]
   
       setTasks(newTasks)
-      console.log(newTasks)
-      await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
-      setInput("")
-    }
-  
-    // new added component: removeTask
-    // working on adding confirmation alert 
-    // need to add this into a separate file but it would be referenced and imported here
-    let removeTask = async (tasktoRemove) => {
-      let newTasks = tasks.filter(task => task.key !== tasktoRemove.key)
-      setTasks(newTasks)
-      console.log(newTasks)
-      await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
-    }
   
     let renderItem = ({ item }) => {
       return (
         <View style={styles.horizontal}>
+      console.log(newTasks)
+      await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
+      setInput("")
+    }
           <CheckBox
             textStyle={item.completed ? {
               textDecorationLine: "line-through",
@@ -70,7 +61,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
             navigation.navigate("Details", { item });
             navigation.setParams({ setTasks: setTasks });
           }} />
-          <Button title="Remove?" onPress={() => removeTask(item)} />
+          <Button title="Remove?" onPress={() => removeTask(item, tasks, setTasks)} />
         </View>
       )
     }
