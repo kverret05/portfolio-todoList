@@ -9,6 +9,9 @@ import React, { useState } from "react"
 import { styles } from "../../App"
 import RemoveTask from "../components/RemoveTask"
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
 
 export async function cacheFonts(fonts) {
     return fonts.map(async (font) => await Font.loadAsync(font))
@@ -62,7 +65,8 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
             navigation.navigate("Details", { item });
             navigation.setParams({ setTasks: setTasks });
           }} />
-          <Button title="Remove?" onPress={() => RemoveTask(item, tasks, setTasks)} />
+          <Button title="Remove" onPress={() => RemoveTask(item, tasks, setTasks)} />
+          <Button title="Edit"></Button>
         </View>
       )
     }

@@ -13,7 +13,8 @@ const Tab = createBottomTabNavigator()
 let taskData = [
   { description: "Do Homework", completed: true, key: 1, relatedTasks: [2] },
   { description: "Play Video Games", completed: false, key: 2, relatedTasks: [3] },
-  { description: "Take A Shower", completed: false, key: 3, relatedTasks: [1] }
+  { description: "Take A Shower", completed: false, key: 3, relatedTasks: [1] },
+  { description: "Eat Dinner", completed: false, key: 4 },
 ]
 
 const Stack = createNativeStackNavigator()
