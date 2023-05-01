@@ -9,9 +9,6 @@ import React, { useState } from "react"
 import { styles } from "../../App"
 import RemoveTask from "../components/RemoveTask"
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-
 
 export async function cacheFonts(fonts) {
     return fonts.map(async (font) => await Font.loadAsync(font))
