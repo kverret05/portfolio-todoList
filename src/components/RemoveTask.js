@@ -18,11 +18,18 @@ const RemoveTask = ({tasktoRemove, tasks, setTasks}) => {
   };
 
   const doRemove = async () => {
-    const newTasks = tasks.filter(task => task.key !== tasktoRemove.key);
+    console.log("Tasks before removal:", tasks);
+    const newTasks = tasks.filter(task => {
+      console.log("Comparing task key", task.key, tasktoRemove.key);
+      return task.key !== tasktoRemove.key;
+    });
+    console.log("New tasks after removal:", newTasks);
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks));
     setTasks(newTasks);
     setIsRemoving(false);
   };
+
+  console.log("Task to remove:", tasktoRemove);
 
   return (
     <View>
@@ -36,3 +43,6 @@ const RemoveTask = ({tasktoRemove, tasks, setTasks}) => {
 };
 
 export default RemoveTask;
+
+
+
