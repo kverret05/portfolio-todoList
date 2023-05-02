@@ -1,10 +1,39 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert, Button, Text, View } from 'react-native';
+import { useState } from 'react';
 
-const RemoveTask = async (tasktoRemove, tasks, setTasks) => {
-  let newTasks = tasks.filter((task) => task.key !== tasktoRemove.key);
-  setTasks(newTasks);
-  console.log(newTasks);
-  await AsyncStorage.setItem("@tasks", JSON.stringify(newTasks));
+const RemoveTask = ({tasktoRemove, tasks, setTasks}) => {
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleRemove = async () => {
+    setIsRemoving(true);
+
+    Alert.alert(
+      `Remove task ${tasktoRemove.key}?`,
+      'Are you sure you want to remove this task?',
+      [
+        { text: 'Cancel', style: 'cancel', onPress: () => setIsRemoving(false) },
+        { text: 'Remove', style: 'destructive', onPress: doRemove },
+      ],
+    );
+  };
+
+  const doRemove = async () => {
+    const newTasks = tasks.filter(task => task.key !== tasktoRemove.key);
+    await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks));
+    setTasks(newTasks);
+    setIsRemoving(false);
+  };
+
+  return (
+    <View>
+      {isRemoving ? (
+        <Text>Removing...</Text>
+      ) : (
+        <Button title="Remove" onPress={handleRemove} />
+      )}
+    </View>
+  );
 };
 
 export default RemoveTask;

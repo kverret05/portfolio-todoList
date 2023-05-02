@@ -48,6 +48,12 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
     setInput("")
   }
 
+  const handleRemove = (tasktoRemove) => {
+    const filteredTasks = tasks.filter((task) => task.key !== tasktoRemove.key);
+    setTasks(filteredTasks);
+    AsyncStorage.setItem('@tasks', JSON.stringify(filteredTasks));
+  };
+  
   let renderItem = ({ item }) => {
     return (
       <View style={styles.horizontal}>
@@ -67,7 +73,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           }} />
         <Button
           icon={<FontAwesome name="trash-o" size={24} color="white" />}
-          onPress={() => RemoveTask(item, tasks, setTasks)}
+          onPress={() => handleRemove(item)}
         />
       </View>
     );
