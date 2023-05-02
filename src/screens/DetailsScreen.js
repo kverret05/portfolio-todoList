@@ -1,37 +1,45 @@
 import { StackActions } from "@react-navigation/native";
-import { Text } from "@rneui/themed"; // change to react-native-elements
-import React, { useEffect } from "react";
+import { Text } from "@react-native-elements"; // change to react-native-elements
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 
 
 function DetailsScreen({ navigation, route, setTasks, tasks }) {
-    console.log(route.params.item.relatedTasks);
-    let { description, relatedTasks } = route.params.item
+    let { description, relatedTasks } = route.params.item;
+    const [relatedTasksState, setRelatedTasksState] = useState(relatedTasks);
+
     useEffect(() => {
-      navigation.setOptions({
-        title: description === "" ? "No title" : description,
-      })
-    }, [navigation])
-  
+        setRelatedTasksState(route.params.item.relatedTasks);
+    }, [route.params.item]);
+
+    useEffect(() => {
+        navigation.setOptions({
+            title: description === "" ? "No title" : description,
+        })
+    }, [navigation, description]);
+
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
-        <Text>{description}</Text>
-        {
-          relatedTasks !== undefined && relatedTasks.length > 0 ?
-            <>
-              <Text>Related Tasks:</Text>
-              {tasks.filter(task => relatedTasks.includes(task.key))
-                .map(cTask => <Button key={cTask.key} title={cTask.description}
-                  onPress={() => {
-                    navigation.dispatch(StackActions.push('Details', { item: cTask, setTasks, tasks, relatedTasks: cTask.relatedTasks }));
-                  }}
-                />)
-              }
-            </>
-            : undefined}
-      </View>
-    )
-  }
-  
-  export default DetailsScreen;
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <Text>Details Screen</Text>
+            <Text>{description}</Text>
+            {relatedTasksState !== undefined && relatedTasksState.length > 0 ? (
+                <>
+                    <Text>Related Tasks:</Text>
+                    {tasks
+                        .filter((task) => relatedTasksState.includes(task.key))
+                        .map((cTask) => (
+                            <Button
+                                key={cTask.key}
+                                title={cTask.description}
+                                onPress={() => {
+                                    navigation.dispatch(
+                                        StackActions.push("Details", {
+                                            item: cTask,
+                                            setTasks,
+                                            tasks,
+                                            relatedTasks: cTask.relatedTasks,
+                                        })
+                                    );
+                                }}
+                            />
+                       
