@@ -64,7 +64,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           onPress={() => {
             navigation.navigate("Details", { item, setTasks });
           }} />
-        <RemoveTask tasktoRemove={item} tasks={tasks} setTasks={setTasks} />
+       <RemoveTask tasktoRemove={tasks} tasks={taskData} setTasks={setTaskData} />
       </View>
     );
   };
