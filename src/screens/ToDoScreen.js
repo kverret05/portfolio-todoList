@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Button, CheckBox, Input } from 'react-native-elements'
-// change @rneui/themed to react native elements!!!!!
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, View, FlatList } from 'react-native'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
@@ -47,12 +46,6 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
     setInput("")
   }
-
-  const handleRemove = (tasktoRemove) => {
-    const filteredTasks = tasks.filter((task) => task.key !== tasktoRemove.key);
-    setTasks(filteredTasks);
-    AsyncStorage.setItem('@tasks', JSON.stringify(filteredTasks));
-  };
   
   let renderItem = ({ item }) => {
     return (
@@ -66,13 +59,14 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           checked={item.completed}
           onPress={() => updateTask(item)}
         />
-         <Button title="Details" onPress={() => {
-          navigation.navigate("Details", { item });
-          navigation.setParams({ setTasks: setTasks });
-        }} />
+        <Button
+          title="Details"
+          onPress={() => {
+            navigation.navigate("Details", { item, setTasks });
+          }} />
         <Button
           icon={<FontAwesome name="trash-o" size={24} color="white" />}
-          onPress={() => handleRemove(item)}
+          onPress={() => handleRemove(item, setTasks)}
         />
       </View>
     );
@@ -88,7 +82,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           value={input}
           placeholder="New task...">
         </Input>
-        <Button title="Add" onPress={addTask} />
+        <Button title="Add task" onPress={addTask} />
       </View>
     </View>
   )
