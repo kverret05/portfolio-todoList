@@ -3,8 +3,6 @@ import { Alert, Button, Text, View } from 'react-native';
 import { useState } from 'react';
 
 const RemoveTask = ({tasktoRemove, tasks, setTasks}) => {
-  const [isRemoving, setIsRemoving] = useState(false);
-
   const handleRemove = async () => {
     setIsRemoving(true);
 
@@ -24,6 +22,8 @@ const RemoveTask = ({tasktoRemove, tasks, setTasks}) => {
     setTasks(newTasks);
     setIsRemoving(false);
   };
+
+  const [isRemoving, setIsRemoving] = useState(false);
 
   return (
     <View>
