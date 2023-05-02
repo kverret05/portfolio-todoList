@@ -1,5 +1,5 @@
 import { StackActions } from "@react-navigation/native";
-import { Text, Button } from "@react-native-elements";
+import { Text, Button } from "react-native-elements";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 
