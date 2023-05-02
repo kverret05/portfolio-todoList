@@ -7,7 +7,7 @@ import * as Font from 'expo-font'
 import React, { useState } from "react"
 import { styles } from "../../App"
 
-import RemoveTask from "../components/RemoveTask"
+import handleRemove from "../components/RemoveTask"
 
 
 export async function cacheFonts(fonts) {
