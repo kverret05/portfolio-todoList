@@ -7,7 +7,7 @@ import * as Font from 'expo-font'
 import React, { useState } from "react"
 import { styles } from "../../App"
 
-import handleRemove from "../components/RemoveTask"
+import RemoveTask from "../components/RemoveTask";
 
 
 export async function cacheFonts(fonts) {
@@ -64,10 +64,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
           onPress={() => {
             navigation.navigate("Details", { item, setTasks });
           }} />
-        <Button
-          icon={<FontAwesome name="trash-o" size={24} color="white" />}
-          onPress={() => handleRemove(item, setTasks)}
-        />
+        <RemoveTask tasktoRemove={item} tasks={tasks} setTasks={setTasks} />
       </View>
     );
   };
