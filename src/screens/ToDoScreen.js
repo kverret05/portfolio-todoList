@@ -46,7 +46,7 @@ export function TodoScreen({ navigation, tasks, setTasks }) {
     await AsyncStorage.setItem('@tasks', JSON.stringify(newTasks))
     setInput("")
   }
-  
+
   let renderItem = ({ item }) => {
     return (
       <View style={styles.horizontal}>
